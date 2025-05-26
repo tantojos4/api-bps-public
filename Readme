@@ -1,0 +1,69 @@
+# API Kode Wilayah BPS
+
+API service untuk mendapatkan data kode wilayah administrasi dari BPS (Badan Pusat Statistik).
+
+## Endpoints
+
+### Sync Data from BPS
+
+Endpoints untuk mensinkronkan data dari BPS ke local JSON files:
+
+- `GET /sync/provinsi` - Sinkronisasi data provinsi
+- `GET /sync/kabupaten/:provID` - Sinkronisasi data kabupaten berdasarkan kode provinsi
+- `GET /sync/kecamatan/:kabID` - Sinkronisasi data kecamatan berdasarkan kode kabupaten
+- `GET /sync/desa/:kecID` - Sinkronisasi data desa berdasarkan kode kecamatan
+
+### Get Data from Local JSON
+
+Endpoints untuk mendapatkan data wilayah dari file JSON lokal:
+
+- `GET /data/provinsi` - Mendapatkan daftar provinsi
+- `GET /data/kabupaten/:provID` - Mendapatkan daftar kabupaten berdasarkan kode provinsi
+- `GET /data/kecamatan/:kabID` - Mendapatkan daftar kecamatan berdasarkan kode kabupaten  
+- `GET /data/desa/:kecID` - Mendapatkan daftar desa berdasarkan kode kecamatan
+
+## Contoh Response
+
+### Provinsi
+```json
+[
+  {
+    "kode": "11",
+    "nama": "ACEH"
+  },
+  {
+    "kode": "12", 
+    "nama": "SUMATERA UTARA"
+  }
+]
+```
+
+### Kabupaten
+```json
+[
+  {
+    "kode_bps": "3201",
+    "kode_dagri": "3201", 
+    "nama_bps": "KAB. BOGOR",
+    "nama_dagri": "KAB. BOGOR"
+  }
+]
+```
+
+### Kecamatan
+```json
+[
+  {
+    "kode": "3201010",
+    "nama": "NANGGUNG"
+  }
+]
+```
+
+## Running Service
+
+```bash
+go run main.go
+```
+
+Service akan berjalan pada `http://localhost:8080`
