@@ -20,5 +20,5 @@ func main() {
 	e.GET("/data/kecamatan/:kabID", handlers.GetKecamatanData)
 	e.GET("/data/desa/:kecID", handlers.GetDesaData)
 
-	e.Logger.Fatal(e.Start(":8080"))
+	e.Logger.Fatal(e.Start(":8081"))
 }

@@ -4,10 +4,12 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo/v4"
+	"github.com/yhartanto178dev/api-bps-public/response"
 	"github.com/yhartanto178dev/api-bps-public/services"
 )
 
 func SyncProvinsi(c echo.Context) error {
+	res := response.NewStatusOk("Syncing provinsi data...")
 	data, err := services.FetchWilayah("provinsi", "2024_1.2022", "")
 	if err != nil {
 		return err
@@ -16,10 +18,12 @@ func SyncProvinsi(c echo.Context) error {
 	if err != nil {
 		return err
 	}
-	return c.JSON(http.StatusOK, data)
+
+	return c.JSON(http.StatusOK, res)
 }
 
 func SyncKabupaten(c echo.Context) error {
+	res := response.NewStatusOk("Syncing kabupaten data...")
 	provID := c.Param("provID")
 	data, err := services.FetchWilayah("kabupaten", "2024_1.2022", provID)
 	if err != nil {
@@ -29,10 +33,11 @@ func SyncKabupaten(c echo.Context) error {
 	if err != nil {
 		return err
 	}
-	return c.JSON(http.StatusOK, data)
+	return c.JSON(http.StatusOK, res)
 }
 
 func SyncKecamatan(c echo.Context) error {
+	res := response.NewStatusOk("Syncing kecamatan data...")
 	kabID := c.Param("kabID")
 	data, err := services.FetchWilayah("kecamatan", "2024_1.2022", kabID)
 	if err != nil {
@@ -42,10 +47,11 @@ func SyncKecamatan(c echo.Context) error {
 	if err != nil {
 		return err
 	}
-	return c.JSON(http.StatusOK, data)
+	return c.JSON(http.StatusOK, res)
 }
 
 func SyncDesa(c echo.Context) error {
+	res := response.NewStatusOk("Syncing desa data...")
 	kecID := c.Param("kecID")
 	data, err := services.FetchWilayah("desa", "2024_1.2022", kecID)
 	if err != nil {
@@ -55,7 +61,7 @@ func SyncDesa(c echo.Context) error {
 	if err != nil {
 		return err
 	}
-	return c.JSON(http.StatusOK, data)
+	return c.JSON(http.StatusOK, res)
 }
 
 func GetProvinsiData(c echo.Context) error {
